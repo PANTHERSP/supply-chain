@@ -16,11 +16,13 @@ const SignInPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Signing in...');
       await signIn(username, password);
+      console.log('Signed in with username:', username);
       setError('');
-      router.push('/');
+      router.push('/dashboard');
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response?.data?.message);
     }
   };
 

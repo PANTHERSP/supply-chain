@@ -1,12 +1,20 @@
 import MouseCursor from "@/components/MouseCursor";
 import NavBar from "@/components/NavBar";
 import SignOutButton from "@/components/SignOutButton";
+import { signOut } from "@/utils/auth";
+import { fetchUser } from "@/utils/fetchUser";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = async ({ children }) => {
 
-  const auth = true
+  const { user, auth } = await fetchUser();
+
+  if (!user || !auth) {
+    await signOut();
+    redirect('/');
+  }
 
   return (
     <>
@@ -36,7 +44,7 @@ const DashboardLayout = ({ children }) => {
               Documentation
             </Link>
             {
-              auth ?
+              user ?
               <>
                 <SignOutButton />
                 <div className="h-[80%] aspect-square">

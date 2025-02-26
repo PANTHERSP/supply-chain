@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import MouseCursor from '@/components/MouseCursor';
+import { register } from '@/utils/auth';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -16,10 +16,14 @@ const RegisterPage = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
-    } else {
+    }
+    try {
+      await register(username, password);
       setError('');
-      await axios.post('http://localhost:8000/register', { username, password }, { withCredentials: true });
       console.log('Registered with username:', username);
+      router.push('/sign-in');
+    } catch (err) {
+      setError(err.response.data.message);
     }
   };
 

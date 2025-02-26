@@ -1,25 +1,24 @@
 import axios from 'axios';
+import { useUserStore } from '@/store/useUserStore';
 
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
+export const signIn = async (username, password) => {
+  // const userStore = useUserStore();
 
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       const res = await axios.get('http://localhost:8000/check-session', { withCredentials: true });
-//       setUser(res.data);
-//       setLoading(false);
-//     };
-//     fetchUser();
-//   }, []);
-
-const signIn = async (username, password) => {
   const res = await axios.post('http://localhost:8000/sign-in', { username, password }, { withCredentials: true });
+  // userStore.setUser(res.data.user);
   console.log('Signed in with username:', username);
 };
 
-const signOut = async () => {
-  await axios.post('http://localhost:8000/sign-out', {}, { withCredentials: true });
+export const signOut = async () => {
+  // const userStore = useUserStore();
+
+  const res = await axios.post('http://localhost:8000/sign-out', {}, { withCredentials: true });
+  // userStore.clearUser();
   console.log('Signed out');
 };
 
-export { signIn, signOut };
+export const register = async (username, password) => {
+  const res = await axios.post('http://localhost:8000/register', { username, password }, { withCredentials: true });
+  console.log('Registered with username:', username);
+};
+

@@ -3,22 +3,18 @@ import SignOutButton from "@/components/SignOutButton";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { FaGithub, FaFacebook, FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
+import { fetchUser } from "@/utils/fetchUser";
 
 const HomePage = async () => {
 
-  const cookieStore = await cookies();
-
-  const res = await axios.get('http://localhost:8000/check-session', { 
-    withCredentials: true, 
-    headers: { 
-      cookie: cookieStore.toString() 
-    } 
-  });
+  // const router = useRouter();
   
-  const { user, auth } = res.data;
-  console.log(user, auth);
+  const { user, auth } = await fetchUser();
+
+  // if (!user || !auth) {
+  //   router.push('/sign-in');
+  // }
 
   return (
     <>
@@ -49,7 +45,7 @@ const HomePage = async () => {
               Documentation
             </Link>
             {
-              auth ?
+              user ?
                 <>
                   <SignOutButton />
                   <div className="h-[80%] aspect-square">

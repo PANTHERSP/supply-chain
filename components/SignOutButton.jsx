@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { signOut } from '@/utils/auth'
 
 const SignOutButton = () => {
-
+  
   const router = useRouter();
 
   const handleSignOut = async () => {
