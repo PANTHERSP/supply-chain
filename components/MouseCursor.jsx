@@ -8,7 +8,7 @@ const MouseCursor = () => {
   useEffect(() => {
 
     const updatePosition = (x, y) => {
-      const { width, height } = cursorPositionRef.current.style
+      const { width, height } = cursorPositionRef.current?.style
       cursorPositionRef.current.style.transform = `translate(${x - parseInt(width) / 2}px, ${y - parseInt(height) / 2}px)`
     }
     const handleMouseMove = (e) => {

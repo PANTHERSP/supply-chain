@@ -1,9 +1,24 @@
 import MouseCursor from "@/components/MouseCursor";
+import SignOutButton from "@/components/SignOutButton";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { FaGithub, FaFacebook, FaInstagram, FaSquareXTwitter  } from "react-icons/fa6";
+import { cookies } from "next/headers";
+import { FaGithub, FaFacebook, FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
 
-const HomePage = () => {
+const HomePage = async () => {
+
+  const cookieStore = await cookies();
+
+  const res = await axios.get('http://localhost:8000/check-session', { 
+    withCredentials: true, 
+    headers: { 
+      cookie: cookieStore.toString() 
+    } 
+  });
+  
+  const { user, auth } = res.data;
+  console.log(user, auth);
 
   return (
     <>
@@ -20,7 +35,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex gap-4"> 
+          <div className="flex gap-4 items-center h-full"> 
             <Link href="/" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Home
             </Link>
@@ -33,15 +48,25 @@ const HomePage = () => {
             <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Documentation
             </Link>
-            <Link href="/signin" className="text-nowrap bg-gradient-to-r from-blue-600/80 via-indigo-400/80 to-purple-500/80 cursor-pointer rounded-2xl p-3">
-              Sign in
-            </Link>
+            {
+              auth ?
+                <>
+                  <SignOutButton />
+                  <div className="h-[80%] aspect-square">
+                    <Image alt="avatar" width={40} height={40} src={'/images/avatar.jpg'} className="rounded-full cursor-pointer h-full w-full object-cover" priority />
+                  </div>
+                </>
+              :
+                <Link href="/sign-in" className="text-nowrap bg-gradient-to-r from-blue-600/80 via-indigo-400/80 to-purple-500/80 cursor-pointer rounded-2xl p-3">
+                  Sign in
+                </Link>
+            }
           </div>
         </div>
         
         <div className="flex-1">
           <div className="flex flex-col absolute top-35 right-50 items-center max-xl:hidden">
-            <Image alt="blockchain" width={450} height={450} className="" src={"/images/blockchain-logo-removebg.png"} priority/>
+            <Image alt="blockchain" width={450} height={450} className="" src={"/images/blockchain-logo-removebg.png"} priority />
             <div className="text-nowrap text-3xl italic">Unbreakable data, unstoppable supply chains.</div>
           </div>
 
