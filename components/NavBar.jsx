@@ -79,12 +79,14 @@ function capitalizeWords(string) {
   return string.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-const NavBar = ({ role }) => {
+const NavBar = ({ role, isNavOpen }) => {
   
   const tabs = allTabs[role]
 
+  // const isNavOpen = true
+
   return (
-    <nav className="flex flex-col fixed top-20 left-0 gap-10 p-6 text-sky-100 w-3xs h-full border-amber-50 border-r-2 transition-all duration-300 ease-in-out">
+    <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-10 p-8 text-sky-100 h-full border-amber-50 border-r-2 transition-all duration-300 ease-in-out bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C]`}>
       <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
           {capitalizeWords(role)}
       </div>
