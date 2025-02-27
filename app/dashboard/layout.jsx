@@ -13,15 +13,17 @@ const DashboardLayout = async ({ children }) => {
 
   if (!user || !auth) {
     await signOut();
-    redirect('/');
+    redirect('/sign-in');
   }
+
+  const mockRole = 'distributor';
 
   return (
     <>
       <MouseCursor />
-      <NavBar />
+      <NavBar role={mockRole} />
       <div className="overflow-hidden text-sky-100 bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C] min-h-screen flex flex-col">
-        <div className="h-20 gap-20 text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 hover:bg-indigo-950/50 transition-all duration-400 ease-in-out border-amber-50 border-b-1">
+        <div className="h-20 w-full gap-20 fixed text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 hover:bg-indigo-950/50 transition-all duration-400 ease-in-out border-amber-50 border-b-2">
           <div className="h-full flex items-center gap-2 font-bold italic"> 
             <div className="h-full aspect-square">
               <Image alt="logo" width={50} height={50} className="h-full w-full object-cover" src={"/images/logo.png"} priority/>
@@ -39,6 +41,9 @@ const DashboardLayout = async ({ children }) => {
             </Link>
             <Link href="/contact" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Contact
+            </Link>
+            <Link href="/dashboard" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+              Dashboard
             </Link>
             <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Documentation

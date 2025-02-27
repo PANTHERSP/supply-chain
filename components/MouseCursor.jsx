@@ -8,7 +8,8 @@ const MouseCursor = () => {
   useEffect(() => {
 
     const updatePosition = (x, y) => {
-      const { width, height } = cursorPositionRef.current?.style || { width: 0, height: 0 };
+      if (!cursorPositionRef.current) return;
+      const { width, height } = cursorPositionRef.current?.style || { width: 800, height: 800 };
       cursorPositionRef.current.style.transform = `translate(${x - parseInt(width) / 2}px, ${y - parseInt(height) / 2}px)`
     }
     const handleMouseMove = (e) => {
@@ -29,7 +30,7 @@ const MouseCursor = () => {
       style={{
         width: 800,
         height: 800,
-        transform: `translate(-50%, -50%)`
+        transform: `translate(-400px, -400px)`
       }}
     />
   );

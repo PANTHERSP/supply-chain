@@ -1,28 +1,102 @@
-"use client"
-
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
-const NavBar = () => {
-  const router = useRouter()
+const customerTabs = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: 'Explorer',
+      href: '/explorer',
+    },
+    {
+      label: 'Purchase',
+      href: '/purchase',
+    },
+    {
+      label: 'Receive',
+      href: '/receive',
+    },
+    {
+      label: 'Your Products',
+      href: '/your-products',
+    },
+  ]
+
+  const distributorTabs = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: 'Explorer',
+      href: '/explorer',
+    },
+    {
+      label: 'Buy Product',
+      href: '/buy-product',
+    },
+    {
+      label: 'Receive',
+      href: '/receive',
+    },
+    {
+      label: 'Ship Product',
+      href: '/ship-product',
+    },
+  ]
+
+  const farmerTabs = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: 'Explorer',
+      href: '/explorer',
+    },
+    {
+      label: 'Add Product',
+      href: '/add-product',
+    },
+    {
+      label: 'Ship Product',
+      href: '/ship-product',
+    },
+    {
+      label: 'All Product',
+      href: '/all-product',
+    },
+  ]
+
+  const allTabs = {
+    customer: customerTabs,
+    distributor: distributorTabs,
+    farmer: farmerTabs
+  }
+
+function capitalizeWords(string) {
+  return string.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+const NavBar = ({ role }) => {
+  
+  const tabs = allTabs[role]
 
   return (
-    <nav className="flex flex-col gap-6 p-6 absolute top-20 left-0 text-sky-100 w-3xs h-full border-amber-100 border-r-1">
-      <Link href="/" className={`${router.pathname === '/' ? 'font-bold' : ''}`}>
-        Home
-      </Link>
-      <Link href="/explorer" className={`${router.pathname === '/about' ? 'font-bold' : ''}`}>
-        Explorer
-      </Link>
-      <Link href="/add-product" className={`${router.pathname === '/contact' ? 'font-bold' : ''}`}>
-        Add Product
-      </Link>
-      <Link href="/ship-product" className={`${router.pathname === '/documentation' ? 'font-bold' : ''}`}>
-        Ship Product
-      </Link>
-      <Link href="/all-product" className={`${router.pathname === '/documentation' ? 'font-bold' : ''}`}>
-        All Product
-      </Link>
+    <nav className="flex flex-col fixed top-20 left-0 gap-10 p-6 text-sky-100 w-3xs h-full border-amber-50 border-r-2 transition-all duration-300 ease-in-out">
+      <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
+          {capitalizeWords(role)}
+      </div>
+      <div className='flex flex-col gap-6 w-full'>
+        {
+          tabs.map(({ label, href }, index) => (
+            <Link href={href} key={index} className='border-amber-50 border-b-2 p-2 text-l font-semibold transition-all duration-300 ease-in-out w-[80%] hover:w-full'>
+              {label}
+            </Link>
+          ))
+        }
+      </div>
     </nav>
   )
 }
