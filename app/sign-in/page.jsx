@@ -17,10 +17,10 @@ const SignInPage = () => {
     e.preventDefault();
     try {
       console.log('Signing in...');
-      await signIn(username, password);
-      console.log('Signed in with username:', username);
+      const user = await signIn(username, password);
+      console.log('Signed in with username:', username, 'role:', user.role);
       setError('');
-      router.push('/dashboard');
+      router.push(`/dashboard/${user.role}/home`);
     } catch (err) {
       setError(err.response?.data?.message);
     }

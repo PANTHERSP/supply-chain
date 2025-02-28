@@ -32,10 +32,3 @@ const DashboardLayout = async ({ children }) => {
 };
 
 export default DashboardLayout;
-
-
-
-
-
-
-

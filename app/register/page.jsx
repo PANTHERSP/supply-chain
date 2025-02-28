@@ -5,8 +5,11 @@ import Link from 'next/link';
 import axios from 'axios';
 import MouseCursor from '@/components/MouseCursor';
 import { register } from '@/utils/auth';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
+  const router = useRouter();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,9 +21,9 @@ const RegisterPage = () => {
       setError('Passwords do not match');
     }
     try {
-      await register(username, password);
+      const user = await register(username, password);
+      console.log('Registered with username:', username, 'role:', user.role);
       setError('');
-      console.log('Registered with username:', username);
       router.push('/sign-in');
     } catch (err) {
       setError(err.response.data.message);

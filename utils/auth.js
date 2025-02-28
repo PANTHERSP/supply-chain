@@ -7,6 +7,8 @@ export const signIn = async (username, password) => {
   const res = await axios.post('http://localhost:8000/sign-in', { username, password }, { withCredentials: true });
   // userStore.setUser(res.data.user);
   console.log('Signed in with username:', username);
+
+  return res.data.user;
 };
 
 export const signOut = async () => {
@@ -20,5 +22,7 @@ export const signOut = async () => {
 export const register = async (username, password) => {
   const res = await axios.post('http://localhost:8000/register', { username, password }, { withCredentials: true });
   console.log('Registered with username:', username);
+
+  return res.data.user;
 };
 
