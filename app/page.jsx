@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaGithub, FaFacebook, FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
 import { fetchUser } from "@/utils/fetchUser";
 
+
 const HomePage = async () => {
 
   // const router = useRouter();
@@ -15,6 +16,9 @@ const HomePage = async () => {
   // if (!user || !auth) {
   //   router.push('/sign-in');
   // }
+  if (user)
+    user.role = 'customer';
+
 
   return (
     <>
@@ -41,7 +45,7 @@ const HomePage = async () => {
             <Link href="/contact" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Contact
             </Link>
-            <Link href="/dashboard" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+            <Link href={user ? `/dashboard/${user.role}/home` : '/sign-in'} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Dashboard
             </Link>
             <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
