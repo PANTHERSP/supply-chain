@@ -9,27 +9,27 @@ const customerTabs = [
     {
       label: 'Home',
       href: '/dashboard/customer/home',
-      icon: <FaHouse size={20} />,
+      icon: <FaHouse size={25} />,
     },
     {
       label: 'Explorer',
       href: '/dashboard/customer/explorer',
-      icon: <FaSearch size={20} />,
+      icon: <FaSearch size={25} />,
     },
     {
       label: 'Purchase',
       href: '/dashboard/customer/purchase',
-      icon: <FaCartShopping size={20} />,
+      icon: <FaCartShopping size={25} />,
     },
     {
       label: 'Receive',
       href: '/dashboard/customer/receive',
-      icon: <FaTruck size={20} />,
+      icon: <FaTruck size={25} />,
     },
     {
       label: 'Your Products',
       href: '/dashboard/customer/your-products',
-      icon: <FaRegCalendarCheck size={20} />,
+      icon: <FaRegCalendarCheck size={25} />,
     },
   ]
 
@@ -123,14 +123,16 @@ const NavBar = ({ role, isNavOpen }) => {
 
   return (
     <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-10 p-8 text-sky-100 h-[calc(100%-80px)] border-amber-50 border-r-2 transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C]`}>
-      <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
-          {capitalizeWords(role)}
-      </div>
-      <div className='flex flex-col gap-6 w-full'>
+      { isNavOpen &&
+        <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
+            {capitalizeWords(role)}
+        </div>
+      }
+      <div className='flex flex-col gap-8 w-full'>
       { 
         isNavOpen ?
           tabs.map(({ label, href, icon }, index) => (
-            <Link href={href} key={index} className={`h-10 text-nowrap transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 p-2 text-l font-semibold  w-[80%] ${pathname === href ? 'border-amber-500 w-full' : ''} hover:w-full`}>
+            <Link href={href} key={index} className={`h-10 text-nowrap transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 text-l font-semibold  w-[80%] ${pathname === href ? 'border-amber-500 w-full' : ''} hover:w-full`}>
               <div className="flex flex-row items-center">
                 {icon}
                 <span className="ml-2">{label}</span>
@@ -138,7 +140,7 @@ const NavBar = ({ role, isNavOpen }) => {
             </Link>
           )) :
           tabs.map(({ label, href, icon }, index) => (
-            <Link href={href} key={index} className={`h-10 transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 hover:text-amber-200 p-2 text-l font-semibold  w-full ${pathname === href ? 'border-amber-500 text-amber-500' : ''}`}>
+            <Link href={href} key={index} className={`h-10 transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 hover:text-amber-200 text-l font-semibold  w-full ${pathname === href ? 'border-amber-500 text-amber-500' : ''}`}>
               <div className="flex flex-col items-center">
                 {icon}
               </div>
