@@ -5,7 +5,7 @@ import SignOutButton from './SignOutButton'
 
 const DashboardHeader = () => {
   return (
-    <div className="h-20 w-full text-sky-100 gap-20 fixed text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 transition-all duration-400 ease-in-out border-amber-50 border-b-2 hover:bg-indigo-950/50">
+    <div className="h-20 w-full top-0 text-sky-100 gap-20 fixed text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 transition-all duration-400 ease-in-out border-amber-50 border-b-2 hover:bg-indigo-950/50">
           <div className="h-full flex items-center gap-2 font-bold italic"> 
             <div className="h-full aspect-square">
               <Image alt="logo" width={50} height={50} className="h-full w-full object-cover" src={"/images/logo.png"} priority/>

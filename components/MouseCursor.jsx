@@ -26,7 +26,7 @@ const MouseCursor = () => {
   return (
     <div
       ref={cursorPositionRef}
-      className="fixed rounded-full bg-radial from-white/8 to-gray-950/3 via-transparent pointer-events-none"
+      className="fixed z-100 rounded-full bg-radial from-white/8 to-gray-950/3 via-transparent pointer-events-none"
       style={{
         width: 800,
         height: 800,
