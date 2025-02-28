@@ -18,14 +18,14 @@ const DashboardLayout = async ({ children }) => {
     redirect('/sign-in');
   }
 
-  const mockRole = 'customer';
+  
 
   return (
     <>
       <MouseCursor />
       <div className="flex flex-col w-screen h-screen text-sky-100 bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C]">
         <DashboardHeader/>
-        <DashboardContent children={children} role={mockRole} />
+        <DashboardContent children={children} role={user.role} />
       </div>
     </>
   )

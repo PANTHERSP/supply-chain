@@ -14,6 +14,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [role, setRole] = useState('customer');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +23,12 @@ const RegisterPage = () => {
       setError('Passwords do not match');
     }
     try {
-      const user = await register(username, password);
-      console.log('Registered with username:', username, 'role:', user.role);
+      const user = await register(username, password, role);
+      console.log('Registered with username:', user.username, 'role:', user.role);
       setError('');
       router.push('/sign-in');
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response?.data?.message);
     }
   };
 
@@ -67,6 +69,18 @@ const RegisterPage = () => {
               />
             </label>
             {error && <p className="text-red-500">{error}</p>}
+            <label className="flex flex-col gap-2">
+              <span className="text-lg text-white">Role:</span>
+              <select
+                className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="customer">Customer</option>
+                <option value="distributor">Distributor</option>
+                <option value="farmer">Farmer</option>
+              </select>
+            </label>
             <button type="submit" className="mt-8 cursor-pointer bg-yellow-500 text-white p-2 rounded-2xl w-full">
               Register
             </button>

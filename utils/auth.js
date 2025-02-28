@@ -19,8 +19,8 @@ export const signOut = async () => {
   console.log('Signed out');
 };
 
-export const register = async (username, password) => {
-  const res = await axios.post('http://localhost:8000/register', { username, password }, { withCredentials: true });
+export const register = async (username, password, role) => {
+  const res = await axios.post('http://localhost:8000/register', { username, password, role }, { withCredentials: true });
   console.log('Registered with username:', username);
 
   return res.data.user;

@@ -16,8 +16,8 @@ const HomePage = async () => {
   // if (!user || !auth) {
   //   router.push('/sign-in');
   // }
-  if (user)
-    user.role = 'customer';
+  // if (user)
+  //   user.role = 'customer';
 
 
   return (

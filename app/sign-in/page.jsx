@@ -18,7 +18,7 @@ const SignInPage = () => {
     try {
       console.log('Signing in...');
       const user = await signIn(username, password);
-      console.log('Signed in with username:', username, 'role:', user.role);
+      console.log('Signed in with username:', user.username, 'role:', user.role);
       setError('');
       router.push(`/dashboard/${user.role}/home`);
     } catch (err) {

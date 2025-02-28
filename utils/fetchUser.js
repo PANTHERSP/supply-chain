@@ -4,6 +4,8 @@ import axios from "axios";
 
 export const fetchUser = async () => {
     const cookieStore = await cookies();
+
+    console.log('cookie', cookieStore.toString());
   
     const res = await axios.get('http://localhost:8000/check-session', { 
         withCredentials: true, 
