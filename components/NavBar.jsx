@@ -113,11 +113,11 @@ function capitalizeWords(string) {
   return string.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-const NavBar = ({ role, isNavOpen }) => {
+const NavBar = ({ user, isNavOpen }) => {
 
   const pathname = usePathname();
   
-  const tabs = allTabs[role]
+  const tabs = allTabs[user.role]
 
   // const isNavOpen = true
 
@@ -125,7 +125,7 @@ const NavBar = ({ role, isNavOpen }) => {
     <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-10 p-8 text-sky-100 h-[calc(100%-80px)] border-amber-50 border-r-2 transition-all duration-500 ease-in-out bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C]`}>
       { isNavOpen &&
         <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
-            {capitalizeWords(role)}
+            {capitalizeWords(user.role)}
         </div>
       }
       <div className='flex flex-col gap-8 w-full'>
@@ -135,7 +135,7 @@ const NavBar = ({ role, isNavOpen }) => {
             <Link href={href} key={index} className={`h-10 text-nowrap transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 text-l font-semibold  w-[80%] ${pathname === href ? 'border-amber-500 w-full' : ''} hover:w-full`}>
               <div className="flex flex-row items-center">
                 {icon}
-                <span className="ml-2">{label}</span>
+                <span className="ml-2 overflow-hidden">{label}</span>
               </div>
             </Link>
           )) :

@@ -11,6 +11,11 @@ import { redirect } from "next/navigation";
 
 const DashboardLayout = async ({ children }) => {
 
+  // let user;
+  // if (!user) {
+  //   user = await fetchUser();
+  // }
+
   const { user, auth } = await fetchUser();
 
   if (!user || !auth) {
@@ -24,8 +29,10 @@ const DashboardLayout = async ({ children }) => {
     <>
       <MouseCursor />
       <div className="flex flex-col w-screen h-screen text-sky-100 bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C]">
-        <DashboardHeader/>
-        <DashboardContent children={children} role={user.role} />
+        <DashboardHeader user={user}/>
+        <DashboardContent user={user}>
+          {children}
+        </DashboardContent>
       </div>
     </>
   )

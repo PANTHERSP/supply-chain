@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import SignOutButton from './SignOutButton'
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ user }) => {
   return (
     <div className="h-20 w-full top-0 text-sky-100 gap-20 fixed text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 transition-all duration-400 ease-in-out border-amber-50 border-b-2 hover:bg-indigo-950/50">
           <div className="h-full flex items-center gap-2 font-bold italic"> 
@@ -24,7 +24,7 @@ const DashboardHeader = () => {
             <Link href="/contact" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Contact
             </Link>
-            <Link href="/dashboard" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+            <Link href={`/dashboard/${user.role}/home`} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
               Dashboard
             </Link>
             <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">

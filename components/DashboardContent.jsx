@@ -4,19 +4,19 @@ import React, { useState } from 'react'
 import NavBar from './NavBar'
 import { IoIosArrowBack } from "react-icons/io";
 
-const DashboardContent = ({ children, role }) => {
+const DashboardContent = ({ children, user }) => {
 
   const [isNavOpen, setIsNavOpen] = useState(true)
 
   // const isNavOpen = true
   return (
     <>
-      <NavBar role={role} isNavOpen={isNavOpen} />
+      <NavBar user={user} isNavOpen={isNavOpen} />
       <div className={`mt-20 ${isNavOpen ? 'ml-65' : 'ml-25'} h-full transition-all duration-500 ease-in-out overflow-hidden text-sky-100 flex flex-col`}>
         <button className={`absolute z-10 cursor-pointer transition-all duration-500 ease-in-out ${!isNavOpen && '-rotate-180'}`} onClick={() => setIsNavOpen(!isNavOpen)}>
           <IoIosArrowBack size={50}/>
         </button>
-        <div className="w-full h-full">
+        <div className="w-full h-full p-15 overflow-y-auto flex flex-col relative text-5xl">
           {children}
         </div>
       </div>
