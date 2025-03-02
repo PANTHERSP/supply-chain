@@ -89,7 +89,7 @@ const AddProductPage = () => {
         <label className="flex flex-col gap-2">
           <span className="text-lg text-white">Price:</span>
           <input
-            type="text"
+            type="number"
             placeholder="Enter Price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -99,7 +99,7 @@ const AddProductPage = () => {
         <label className="flex flex-col gap-2">
           <span className="text-lg text-white">Quantity:</span>
           <input
-            type="text"
+            type="number"
             placeholder="Enter Quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
@@ -109,7 +109,7 @@ const AddProductPage = () => {
         <label className="flex flex-col gap-2">
           <span className="text-lg text-white">Product Weight:</span>
           <input
-            type="text"
+            type="number"
             placeholder="Enter Product Weight"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
@@ -119,7 +119,7 @@ const AddProductPage = () => {
         <label className="flex flex-col gap-2">
           <span className="text-lg text-white">Farm Latitude:</span>
           <input
-            type="text"
+            type="number"
             placeholder="Enter Farm Latitude"
             value={latitude}
             onChange={(e) => setLatitude(e.target.value)}
@@ -129,7 +129,7 @@ const AddProductPage = () => {
         <label className="flex flex-col gap-2">
           <span className="text-lg text-white">Farm Longitude:</span>
           <input
-            type="text"
+            type="number"
             placeholder="Enter Farm Longitude"
             value={longitude}
             onChange={(e) => setLongitude(e.target.value)}
