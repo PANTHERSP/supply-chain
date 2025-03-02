@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import axios from "axios";
+import { redirect } from "next/navigation";
+import { signOut } from "./auth";
 
 
 export const fetchUser = async () => {
@@ -25,6 +27,11 @@ export const fetchUser = async () => {
     // }
     
     // userStore.setUser(user);
+
+    // if (!user || !auth) {
+    //   await signOut();
+    //   return redirect('/sign-in');
+    // }
     
     return { user, auth };
   

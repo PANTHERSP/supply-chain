@@ -8,6 +8,7 @@ import { fetchUser } from "@/utils/fetchUser";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { checkUser } from "@/utils/checkUser";
 
 const DashboardLayout = async ({ children }) => {
 
@@ -16,12 +17,12 @@ const DashboardLayout = async ({ children }) => {
   //   user = await fetchUser();
   // }
 
-  const { user, auth } = await fetchUser();
+  const { user, auth } = await checkUser();
 
-  if (!user || !auth) {
-    await signOut();
-    redirect('/sign-in');
-  }
+  // if (!user || !auth) {
+  //   await signOut();
+  //   redirect('/sign-in');
+  // }
 
   
 

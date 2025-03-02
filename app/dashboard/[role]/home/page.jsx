@@ -14,8 +14,8 @@ const HomePage = () => {
           priority
         />
         
-        <div className="flex flex-col justify-center relative top-0 left-0 w-full h-full">
-          <div className='gap-8 flex flex-col max-w-[620px]'>
+        {/* <div className="flex flex-col justify-center relative top-0 left-0 w-full h-full"> */}
+          <div className='gap-8 flex flex-col max-w-[620px] z-10 my-auto self-start'>
             <div className='text-6xl font-bold '>
               Efficient Supply Chain Management
             </div>
@@ -27,7 +27,7 @@ const HomePage = () => {
             </Link>
           </div>
           
-        </div>
+        {/* </div> */}
       {/* </div> */}
     </>
   )

@@ -2,34 +2,38 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FaSearch, FaTruck } from "react-icons/fa";
-import { FaHouse, FaCartShopping, FaRegCalendarCheck } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
+import { FaHouse, FaCartShopping, FaRegCalendarCheck, FaPlus, FaWarehouse, FaTruckFast  } from "react-icons/fa6";
+import { SiAftership } from "react-icons/si";
+
+
+const iconSize = 25
 
 const customerTabs = [
     {
       label: 'Home',
       href: '/dashboard/customer/home',
-      icon: <FaHouse size={25} />,
+      icon: <FaHouse size={iconSize} />,
     },
     {
       label: 'Explorer',
       href: '/dashboard/customer/explorer',
-      icon: <FaSearch size={25} />,
+      icon: <FaSearch size={iconSize} />,
     },
     {
-      label: 'Purchase',
-      href: '/dashboard/customer/purchase',
-      icon: <FaCartShopping size={25} />,
+      label: 'Order',
+      href: '/dashboard/customer/order',
+      icon: <FaCartShopping size={iconSize} />,
     },
     {
       label: 'Receive',
       href: '/dashboard/customer/receive',
-      icon: <FaTruck size={25} />,
+      icon: <SiAftership size={iconSize} />,
     },
     {
       label: 'Your Products',
       href: '/dashboard/customer/your-products',
-      icon: <FaRegCalendarCheck size={25} />,
+      icon: <FaRegCalendarCheck size={iconSize} />,
     },
   ]
 
@@ -37,22 +41,28 @@ const customerTabs = [
     {
       label: 'Home',
       href: '/dashboard/distributor/home',
+      icon: <FaHouse size={iconSize} />,
     },
     {
       label: 'Explorer',
       href: '/dashboard/distributor/explorer',
+      icon: <FaSearch size={iconSize} />,
     },
     {
-      label: 'Buy Product',
-      href: '/dashboard/distributor/buy-product',
+      label: 'Order',
+      href: '/dashboard/distributor/order',
+      icon: <FaCartShopping size={iconSize} />,
     },
     {
       label: 'Receive',
       href: '/dashboard/distributor/receive',
+      icon: <SiAftership size={iconSize} />,
+      
     },
     {
       label: 'Ship Product',
       href: '/dashboard/distributor/ship-product',
+      icon: <FaTruckFast size={iconSize} />,
     },
   ]
 
@@ -60,22 +70,27 @@ const customerTabs = [
     {
       label: 'Home',
       href: '/dashboard/farmer/home',
+      icon: <FaHouse size={iconSize} />,
     },
     {
       label: 'Explorer',
       href: '/dashboard/farmer/explorer',
+      icon: <FaSearch size={iconSize} />,
     },
     {
       label: 'Add Product',
       href: '/dashboard/farmer/add-product',
+      icon: <FaPlus size={iconSize} />,
     },
     {
       label: 'Ship Product',
       href: '/dashboard/farmer/ship-product',
+      icon: <FaTruckFast size={iconSize} />,
     },
     {
       label: 'All Products',
       href: '/dashboard/farmer/all-products',
+      icon: <FaWarehouse size={iconSize} />,
     },
   ]
 

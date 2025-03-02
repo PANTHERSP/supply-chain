@@ -16,7 +16,7 @@ const DashboardContent = ({ children, user }) => {
         <button className={`absolute z-10 cursor-pointer transition-all duration-500 ease-in-out ${!isNavOpen && '-rotate-180'}`} onClick={() => setIsNavOpen(!isNavOpen)}>
           <IoIosArrowBack size={50}/>
         </button>
-        <div className="w-full h-full p-15 overflow-y-auto flex flex-col relative text-5xl">
+        <div className="w-full h-full relative p-15 flex flex-col text-5xl overflow-y-auto overflow-x-hidden">
           {children}
         </div>
       </div>
