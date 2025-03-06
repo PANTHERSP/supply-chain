@@ -29,7 +29,7 @@ const SignInPage = () => {
   return (
     <>
       <MouseCursor />
-      <div className="overflow-hidden justify-center items-center text-sky-100 bg-gradient-to-r from-gray-900 via-gray-950 to-[#22053C] min-h-screen flex flex-col">
+      <div className="overflow-hidden relative justify-center items-center text-sky-100 min-h-screen flex flex-col">
         <div className="flex flex-col w-[80%] max-w-md min-w-xs gap-4 p-8 rounded-2xl shadow-md bg-gradient-to-r from-indigo-500/50 via-purple-500/50 to-pink-500/50">
           <h1 className="text-4xl text-white">Sign In</h1>
           <p className="text-lg text-white">Sign in to your account</p>
