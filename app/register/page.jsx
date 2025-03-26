@@ -23,8 +23,8 @@ const RegisterPage = () => {
       setError('Passwords do not match');
     }
     try {
-      const user = await register(username, password, role);
-      console.log('Registered with username:', user.username, 'role:', user.role);
+      const user = await register(username, password);
+      console.log('Registered with username:', user.username);
       setError('');
       router.push('/sign-in');
     } catch (err) {
@@ -69,7 +69,7 @@ const RegisterPage = () => {
               />
             </label>
             {error && <p className="text-red-500">{error}</p>}
-            <label className="flex flex-col gap-2">
+            {/* <label className="flex flex-col gap-2">
               <span className="text-lg text-white">Role:</span>
               <select
                 className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
@@ -80,7 +80,7 @@ const RegisterPage = () => {
                 <option value="distributor">Distributor</option>
                 <option value="farmer">Farmer</option>
               </select>
-            </label>
+            </label> */}
             <button type="submit" className="mt-8 cursor-pointer bg-yellow-500 text-white p-2 rounded-2xl w-full">
               Register
             </button>

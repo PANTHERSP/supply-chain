@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Image from 'next/image';
 
@@ -18,10 +18,11 @@ const ExplorerPage = () => {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const modalRef = useRef();
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await axios.get('http://localhost:8000/get-all-products', { withCredentials: true });
+            const res = await axios.get('http://localhost:8000/products', { withCredentials: true });
             setProducts(mockProducts);
             // setProducts(res.data.products);
         };
@@ -31,6 +32,36 @@ const ExplorerPage = () => {
     const filteredProducts = products.filter(product =>
         product.productName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const toggleModal = (product) => {
+        if (selectedProduct) {
+            const modal = modalRef.current;
+            if (modal) {
+                modal.style.transition = 'opacity 400ms ease, transform 400ms ease';
+                modal.style.opacity = 0;
+                modal.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    setSelectedProduct(null);
+                }, 400);
+            } else {
+                setSelectedProduct(null);
+            }
+        } else {
+            setSelectedProduct(product);
+            requestAnimationFrame(() => {
+                const modal = modalRef.current;
+                if (modal) {
+                    modal.style.opacity = 0;
+                    modal.style.transform = 'scale(0)';
+                    requestAnimationFrame(() => {
+                        modal.style.transition = 'opacity 400ms ease, transform 400ms ease';
+                        modal.style.opacity = 1;
+                        modal.style.transform = 'scale(1)';
+                    });
+                }
+            });
+        }
+    };
 
     return (
         <>
@@ -48,7 +79,7 @@ const ExplorerPage = () => {
                         <div
                             key={index}
                             className="flex flex-col p-5 text-sky-100 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-                            onClick={() => setSelectedProduct(product)}
+                            onClick={() => toggleModal(product)}
                         >
                             <div className="relative w-full h-40 mb-4">
                                 <Image fill src={product.productImage} alt={product.productName} className="object-cover rounded-lg" />
@@ -64,9 +95,9 @@ const ExplorerPage = () => {
                 </div>
             </div>
             {selectedProduct && (
-                <div className="fixed top-0 left-0 w-full h-full bg-black/85 flex items-center justify-center z-50">
+                <div ref={modalRef} className="fixed top-0 left-0 w-full h-full bg-black/85 flex items-center justify-center z-50">
                     <div className="bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 p-8 rounded-3xl max-w-md w-full text-sky-100">
-                        <button onClick={() => setSelectedProduct(null)} className="text-white absolute top-4 right-4 cursor-pointer">Close</button>
+                        <button onClick={toggleModal} className="text-white absolute top-4 right-4 cursor-pointer text-5xl">✕</button>
                         <div className="relative w-full h-90 mb-4">
                             <Image fill src={selectedProduct.productImage} alt={selectedProduct.productName} className="object-cover rounded-xl" />
                         </div>

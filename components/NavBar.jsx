@@ -1,13 +1,121 @@
 "use client"
 
+import { useSelectedDeal } from '@/contexts/SelectedDealContext';
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { FaHouse, FaCartShopping, FaRegCalendarCheck, FaPlus, FaWarehouse, FaTruckFast  } from "react-icons/fa6";
 import { SiAftership } from "react-icons/si";
 
 
 const iconSize = 25
+
+const getTabs = (role, dealId) => {
+  const customerTabs = [
+    {
+      label: 'Home',
+      href: `/dashboard/${dealId}/home`,
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: `/dashboard/${dealId}/explorer`,
+      icon: <FaSearch size={iconSize} />,
+    },
+    {
+      label: 'Order',
+      href: `/dashboard/${dealId}/order`,
+      icon: <FaCartShopping size={iconSize} />,
+    },
+    {
+      label: 'Receive',
+      href: `/dashboard/${dealId}/receive`,
+      icon: <SiAftership size={iconSize} />,
+    },
+    {
+      label: 'Your Products',
+      href: `/dashboard/${dealId}/your-products`,
+      icon: <FaRegCalendarCheck size={iconSize} />,
+    }
+  ]
+
+  const distributorTabs = [
+    {
+      label: 'Home',
+      href: `/dashboard/${dealId}/home`,
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: `/dashboard/${dealId}/explorer`,
+      icon: <FaSearch size={iconSize} />,
+    },
+    {
+      label: 'Order',
+      href: `/dashboard/${dealId}/order`,
+      icon: <FaCartShopping size={iconSize} />,
+    },
+    {
+      label: 'Receive',
+      href: `/dashboard/${dealId}/receive`,
+      icon: <SiAftership size={iconSize} />,
+    },
+    {
+      label: 'Ship Product',
+      href: `/dashboard/${dealId}/ship-product`,
+      icon: <FaTruckFast size={iconSize} />,
+    }
+  ]
+
+  const farmerTabs = [
+    {
+      label: 'Home',
+      href: `/dashboard/${dealId}/home`,
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: `/dashboard/${dealId}/explorer`,
+      icon: <FaSearch size={iconSize} />,
+    },
+    {
+      label: 'Add Product',
+      href: `/dashboard/${dealId}/add-product`,
+      icon: <FaPlus size={iconSize} />,
+    },
+    {
+      label: 'Ship Product',
+      href: `/dashboard/${dealId}/ship-product`,
+      icon: <FaTruckFast size={iconSize} />,
+    },
+    {
+      label: 'All Products',
+      href: `/dashboard/${dealId}/all-products`,
+      icon: <FaWarehouse size={iconSize} />,
+    }
+  ]
+
+  const selectDealTabs = [
+    {
+      label: 'Home',
+      href: `/dashboard/${dealId}/home`,
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: `/dashboard/${dealId}/explorer`,
+      icon: <FaSearch size={iconSize} />,
+    }
+  ]
+
+  if (role === 'customer') return customerTabs;
+  if (role === 'distributor') return distributorTabs;
+  if (role === 'farmer') return farmerTabs;
+  if (role === 'select-deal') return selectDealTabs;
+   
+    
+}
 
 const customerTabs = [
     {
@@ -94,6 +202,39 @@ const customerTabs = [
     },
   ]
 
+  const adminTabs = [
+    {
+      label: 'Home',
+      href: '/dashboard/admin/home',
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: '/dashboard/admin/explorer',
+      icon: <FaSearch size={iconSize} />,
+    },
+    {
+      label: 'Assign Role',
+      href: '/dashboard/admin/assign-role',
+      icon: <FaPlus size={iconSize} />,
+    }
+  ]
+
+  const selectDealTabs = [
+    {
+      label: 'Home',
+      href: '/dashboard/select-deal/home',
+      icon: <FaHouse size={iconSize} />,
+    },
+    {
+      label: 'Explorer',
+      href: '/dashboard/select-deal/explorer',
+      icon: <FaSearch size={iconSize} />,
+    },
+  ]
+
+
+
 // const customerTabs = [
 //   { label: "Home", href: "/" },
 //   { label: "Explorer", href: "/explorer" },
@@ -121,26 +262,53 @@ const customerTabs = [
   const allTabs = {
     customer: customerTabs,
     distributor: distributorTabs,
-    farmer: farmerTabs
+    farmer: farmerTabs,
+    admin: adminTabs,
+    "select-deal": selectDealTabs
   }
 
 function capitalizeWords(string) {
   return string.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-const NavBar = ({ user, isNavOpen }) => {
+const NavBar = ({ user, filteredDeals, isNavOpen }) => {
+
+  const [selectedDeal, setSelectedDeal] = useSelectedDeal();
+
+  const [isDealListOpen, setIsDealListOpen] = useState(false); 
+
+  console.log('selectedDeal from navbar', selectedDeal)
 
   const pathname = usePathname();
+
+  const router = useRouter();
+
+  const role = user.isAdmin ? 'admin' : selectedDeal ? selectedDeal?.participants?.find(participant => participant.username === user.username).role ?? 'select-deal' : 'select-deal';
+
+  console.log('role', role)
   
-  const tabs = allTabs[user.role]
+  const tabs = getTabs(role, selectedDeal?.dealId || 'select-deal');
+
+  console.log('tabs', tabs)
+
+  // const currentTab = tabs?.find((tab) => tab.href === pathname);
+
+  // if (user.role === 'admin') {
+
+  // }
 
   // const isNavOpen = true
+  // const filteredDeals = deals.filter(deal =>
+  //   deal.participants.some(participant =>
+  //     participant.username === user.username 
+  //   )
+  // );
 
   return (
     <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-10 p-8 text-sky-100 h-[calc(100%-80px)] border-amber-50 border-r-2 transition-all duration-500 ease-in-out`}>
       { isNavOpen &&
-        <div className="text-3xl font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
-            {capitalizeWords(user.role)}
+        <div className="text-3xl whitespace-nowrap font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
+            {selectedDeal || pathname.split('/')[2] === 'select-deal' ? capitalizeWords(role.replace('-', ' ') ) : '.'}
         </div>
       }
       <div className='flex flex-col gap-8 w-full'>
@@ -163,6 +331,49 @@ const NavBar = ({ user, isNavOpen }) => {
           ))
       }
       </div>
+      {/* {
+        isNavOpen ?
+          filteredDeals.map((deal, index) => {
+            const dealParticipants = deal.participants.map((participant, index) => {
+              if (participant.username === user.username) {
+
+              }
+            // <Link href={`/dashboard/${role}/home`} 
+          }
+      } */}
+      {
+        isDealListOpen ?
+        <div className='fixed w-49 bottom-15 opacity-100 flex flex-col gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
+
+          {
+            
+            filteredDeals.map((deal, index) => {
+              
+              // const role = deal.participants.find(participant => participant.username === user.username).role
+              
+              return (
+                <button className={`${selectedDeal?.dealId === deal.dealId ? 'text-amber-500' : ''} cursor-pointer hover:text-amber-200 transition-all duration-500 ease-in-out bg-blue-500 p-2`} key={index} onClick={() => {
+                  
+                  router.push(`/dashboard/${deal.dealId}/home`);
+                  
+                  }}>
+                  {deal.dealId} --- {deal.dealName}
+                </button>
+              )
+            }) 
+          }
+            
+        </div>
+        :
+        <div className='fixed w-49 bottom-15 opacity-100 flex flex-col gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
+          <button className='cursor-pointer hover:text-amber-200 transition-all duration-500 ease-in-out bg-blue-500 p-2' onClick={() => {
+            setIsDealListOpen(true)
+          }}>
+            Your Deals
+          </button>
+        </div>
+      }
+
     </nav>
   )
 }

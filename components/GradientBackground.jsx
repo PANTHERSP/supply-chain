@@ -64,7 +64,7 @@ const GradientBackground = () => {
         vec3 color3 = vec3(100.0 / 255.0, 20.0 / 255.0, 150.0 / 255.0); // ม่วงอมดำ
 
         vec3 gradientColor = mix(color1, color2, uv.y * 1.5) + (n * color3 * 1.5);
-        gradientColor *= 0.3; // ลดแสงให้เข้มขึ้น
+        gradientColor *= 0.45; // ลดแสงให้เข้มขึ้น
 
         gl_FragColor = vec4(gradientColor, 1.0);
       }
@@ -132,7 +132,8 @@ const GradientBackground = () => {
         height: "100vh",
         zIndex: 0,
         opacity: 0,
-        transition: "opacity 0.5s ease-in-out"
+        transition: "opacity 0.5s ease-in-out",
+        // overflow: "hidden"
       }}
     />
   );

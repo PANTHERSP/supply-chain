@@ -18,9 +18,9 @@ const SignInPage = () => {
     try {
       console.log('Signing in...');
       const user = await signIn(username, password);
-      console.log('Signed in with username:', user.username, 'role:', user.role);
+      console.log('Signed in with username:', user.username, 'isAdmin:', user.isAdmin);
       setError('');
-      router.push(`/dashboard/${user.role}/home`);
+      router.push(`/dashboard/select-deal/home`);
     } catch (err) {
       setError(err.response?.data?.message);
     }

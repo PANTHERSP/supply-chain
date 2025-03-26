@@ -1,16 +1,15 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import SignOutButton from './SignOutButton'
-import HamburgerMenuBar from './HamburgerMenuBar'
+import SignOutButton from "@/components/SignOutButton";
+import Image from "next/image"
+import Link from "next/link"
 
-const DashboardHeader = ({ user }) => {
+import HamburgerMenuBar from "./HamburgerMenuBar";
 
-  // const headersList = headers();
-  // const pathname = headersList.get('x-url') || '';
-  // console.log('pathname', pathname);
+const LandingPageHeader = ({ user }) => {
+
+  console.log('user', user);
+
   return (
-    <div className="h-20 w-full gap-20 fixed z-2 text-xl flex justify-between items-center rounded-bl-4xl py-3 px-20 max-sm:px-3 transition-all duration-400 ease-in-out border-b-2 border-amber-50">
+    <div className="h-20 w-full gap-20 fixed z-1 text-xl flex justify-between items-center rounded-b-4xl py-3 px-20 max-sm:px-3 transition-all duration-400 ease-in-out">
         <div className="h-full flex items-center gap-2 font-bold italic"> 
           <div className="h-full aspect-square">
             <Image alt="logo" width={50} height={50} className="h-full w-full object-cover" src={"/images/logo.png"} priority/>
@@ -29,12 +28,15 @@ const DashboardHeader = ({ user }) => {
           <Link href="/contact" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
             Contact
           </Link>
-          <Link href={user ? `/dashboard/${user.role}/home` : '/sign-in'} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+          <Link href={user ? `/dashboard/select-deal/home` : '/sign-in'} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
             Dashboard
           </Link>
           <Link href={`/settings`} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
             Settings
           </Link>
+          { user?.isAdmin && <Link href="/create-deal" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+            Create Deal
+          </Link>}
           {/* <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
             Documentation
           </Link> */}
@@ -58,4 +60,4 @@ const DashboardHeader = ({ user }) => {
   )
 }
 
-export default DashboardHeader
+export default LandingPageHeader
