@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useSelectedDeal } from '@/contexts/SelectedDealContext';
+import { useUser } from '@/contexts/UserContext';
 
 const mockProducts = Array.from({ length: 100 }, (_, i) => ({
     universalId: i + 1,
@@ -18,15 +20,19 @@ const mockProducts = Array.from({ length: 100 }, (_, i) => ({
 const ShipProductPage = () => {
 
     const pathname = usePathname();
-    const role = pathname.split('/')[3];
-    const lastStatus = role === 'farmer' ? 'distributor order product' : 'customer order product';
-    const updateStatus = role === 'farmer' ? 'farmer ship product' : 'distributor ship product';
+    const [selectedDeal, setSelectedDeal] = useSelectedDeal();
 
+    
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
     const modalRef = useRef();
-
+    
+    const user = useUser();
+    const role = user.isAdmin ? 'admin' : selectedDeal ? selectedDeal?.participants?.find(participant => participant.username === user.username).role ?? 'select-deal' : 'select-deal';
+    console.log('role', role)
+    const lastStatus = role === 'farmer' ? 'distributor order product' : 'customer order product';
+    const updateStatus = role === 'farmer' ? 'farmer ship product' : 'distributor ship product';
     const fetchProducts = async () => {
       // const res = await axios.get('http://localhost:8000/products', { withCredentials: true });
       // setProducts(mockProducts);

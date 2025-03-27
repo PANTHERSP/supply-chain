@@ -5,6 +5,8 @@ import axios from 'axios'
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import NotificationModal from '@/components/NotificationModal';
+import { useSelectedDeal } from '@/contexts/SelectedDealContext';
+import { useUser } from '@/contexts/UserContext';
 
 const mockProducts = Array.from({ length: 100 }, (_, i) => ({
     universalId: i + 1,
@@ -22,11 +24,15 @@ const YourProductsPage = () => {
     // const role = pathname.split('/')[3];
     // const lastStatus = role === 'distributor' ? 'farmer add product' : 'distributor receive product';
     // const updateStatus = role === 'distributor' ? 'distributor order product' : 'customer order product';
+    const [selectedDeal, setSelectedDeal] = useSelectedDeal();
     const [visible, setVisible] = useState(false);
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
     const modalRef = useRef();
+
+    const user = useUser();
+    const role = user.isAdmin ? 'admin' : selectedDeal ? selectedDeal?.participants?.find(participant => participant.username === user.username).role ?? 'select-deal' : 'select-deal';
 
     const fetchProducts = async () => {
       // const res = await axios.get('http://localhost:8000/products', { withCredentials: true });

@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import axios from 'axios';
 import { SelectedDealProvider } from '@/contexts/SelectedDealContext';
 import { usePathname } from 'next/navigation';
+import { UserProvider } from '@/contexts/UserContext';
 
 const DashboardContent = ({ children, user }) => {
 
@@ -55,6 +56,7 @@ const DashboardContent = ({ children, user }) => {
 
   return (
     <>
+    <UserProvider user={user}>
     <SelectedDealProvider selectedDeal={selectedDeal} setSelectedDeal={setSelectedDeal}>
       <NavBar user={user} filteredDeals={filteredDeals} isNavOpen={isNavOpen} />
       <div className={`mt-20 ${isNavOpen ? 'ml-65' : 'ml-25'} h-full transition-all duration-500 ease-in-out overflow-hidden text-sky-100 flex flex-col`}>
@@ -66,6 +68,7 @@ const DashboardContent = ({ children, user }) => {
         </div>
       </div>
     </SelectedDealProvider>
+    </UserProvider>
     </>
   )
 }
