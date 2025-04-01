@@ -20,7 +20,7 @@ const SignInPage = () => {
       const user = await signIn(username, password);
       console.log('Signed in with username:', user.username, 'isAdmin:', user.isAdmin);
       setError('');
-      router.push(`/dashboard/select-deal/home`);
+      router.push(user.isAdmin ? `/create-deal` : `/dashboard/select-deal/home`);
     } catch (err) {
       setError(err.response?.data?.message);
     }

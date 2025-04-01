@@ -1,11 +1,12 @@
 "use client"
 
 import { useSelectedDeal } from '@/contexts/SelectedDealContext';
+import Image from 'next/image';
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
-import { FaHouse, FaCartShopping, FaRegCalendarCheck, FaPlus, FaWarehouse, FaTruckFast  } from "react-icons/fa6";
+import { FaHouse, FaCartShopping, FaRegCalendarCheck, FaPlus, FaWarehouse, FaTruckFast, FaBars  } from "react-icons/fa6";
 import { SiAftership } from "react-icons/si";
 
 
@@ -343,34 +344,57 @@ const NavBar = ({ user, filteredDeals, isNavOpen }) => {
       } */}
       {
         isDealListOpen ?
-        <div className='fixed w-49 bottom-15 opacity-100 flex flex-col gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
+        <div className='fixed w-49 h-full opacity-100 flex flex-col gap-6 bg-black rounded-xl'>
 
-          {
-            
-            filteredDeals.map((deal, index) => {
+          <button className='text-3xl w-10 h-10 flex items-center mx-auto mt-4 justify-center cursor-pointer' onClick={() => setIsDealListOpen(false)}>
+            ✕
+          </button>
+
+            <div className='flex flex-col gap-6'>
+
+
+            {
               
-              // const role = deal.participants.find(participant => participant.username === user.username).role
-              
-              return (
-                <button className={`${selectedDeal?.dealId === deal.dealId ? 'text-amber-500' : ''} cursor-pointer hover:text-amber-200 transition-all duration-500 ease-in-out bg-blue-500 p-2`} key={index} onClick={() => {
-                  
-                  router.push(`/dashboard/${deal.dealId}/home`);
-                  
+              filteredDeals.map((deal, index) => {
+                
+                // const role = deal.participants.find(participant => participant.username === user.username).role
+                
+                return (
+                  <div className={`${selectedDeal?.dealId === deal.dealId ? 'text-amber-500' : ''} border-amber-50 border-b-2 cursor-pointer gap-3 flex flex-col items-center rounded-xl hover:text-amber-200 transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 p-4`} key={index} onClick={() => {
+                    
+                    router.push(`/dashboard/${deal.dealId}/home`);
+                    
                   }}>
-                  {deal.dealId} --- {deal.dealName}
-                </button>
-              )
-            }) 
-          }
-            
+                    <p className='text-lg font-semibold'>Deal ID: {deal.dealId}</p>
+                    <div className="flex flex-row items-center justify-around w-full">
+                      {
+                        deal.participants.map((participant, index) =>
+                          <div key={index} className='flex flex-col items-center'>
+
+                            <div className="h-10 aspect-square">
+                              <Image src={participant.profileImage ? participant.profileImage : '/images/avatar.jpg'} alt={participant.username} width={1000} height={1000} className="rounded-full w-full h-full object-cover" />
+                            </div>
+
+                            <p>{participant.username}</p>
+                          </div> 
+                        )
+                      }
+                    </div>
+                      
+                  </div>
+                )
+              }) 
+            }
+              
+          </div>
         </div>
         :
-        <div className='fixed w-49 bottom-15 opacity-100 flex flex-col gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
-          <button className='cursor-pointer hover:text-amber-200 transition-all duration-500 ease-in-out bg-blue-500 p-2' onClick={() => {
+        <div className='mt-auto opacity-100 flex flex-col whitespace-nowrap gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
+          <div className='cursor-pointer rounded-xl flex flex-row justify-center hover:text-amber-200 transition-all duration-500 ease-in-out bg-blue-500 p-2' onClick={() => {
             setIsDealListOpen(true)
           }}>
-            Your Deals
-          </button>
+            <p className='overflow-hidden'>{ isNavOpen ? 'Your Deals' : 'X' }</p>
+          </div>
         </div>
       }
 

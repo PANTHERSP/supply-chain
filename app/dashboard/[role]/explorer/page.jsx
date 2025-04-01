@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useSelectedDeal } from '@/contexts/SelectedDealContext';
 
 const mockProducts = Array.from({ length: 100 }, (_, i) => ({
     universalId: i + 1,
@@ -15,6 +17,8 @@ const mockProducts = Array.from({ length: 100 }, (_, i) => ({
 }));
 
 const ExplorerPage = () => {
+
+    const [selectDeal, setSelectedDeal] = useSelectedDeal();
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -23,7 +27,9 @@ const ExplorerPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             const res = await axios.get('http://localhost:8000/products', { withCredentials: true });
-            setProducts(mockProducts);
+            const products = res.data.products;
+            const filteredProducts = products.filter(product => product.dealId === selectDeal.dealId);
+            setProducts(filteredProducts);
             // setProducts(res.data.products);
         };
         fetchProducts();

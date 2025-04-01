@@ -6,6 +6,9 @@ import { FileUploader } from 'react-drag-drop-files'
 import axios from 'axios'
 import uploadFile from '@/actions/uploadFile'
 import { usePathname } from 'next/navigation'
+import { v4 as uuidv4 } from 'uuid';
+import { format } from 'date-fns';
+import { th } from 'date-fns/locale';
 
 const AddProductPage = () => {
 
@@ -55,7 +58,15 @@ const AddProductPage = () => {
         plantingDate,
         expiryDate,
         imageUrl: await uploadFile(file, 'products'),
-        dealId: middlePathname
+        dealId: middlePathname,
+        history: [
+          {
+            status: 'farmer add product',
+            evidence: uuidv4(),
+            date: format(new Date(), 'dd/MM/yyyy HH:mm', { locale: th }),
+            timestamp: new Date().getTime()
+          }
+        ]
       }, {
         withCredentials: true
       })

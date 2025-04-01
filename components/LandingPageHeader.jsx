@@ -34,7 +34,7 @@ const LandingPageHeader = ({ user }) => {
           <Link href={`/settings`} className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
             Settings
           </Link>
-          { user?.isAdmin && <Link href="/create-deal" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">
+          { user?.isAdmin && <Link href="/create-deal" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3 whitespace-nowrap">
             Create Deal
           </Link>}
           {/* <Link href="/documentation" className="transition-all duration-400 ease-in-out p-3 rounded-2xl hover:bg-indigo-500/40 cursor-pointer hover:rounded-2xl hover:p-3">

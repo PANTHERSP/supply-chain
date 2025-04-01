@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import SignOutButton from './SignOutButton';
 import Image from 'next/image';
+import ZoomProfileImage from './ZoomProfileImage';
 
 const HamburgerMenuBar = ({ user }) => {
 
@@ -33,9 +34,10 @@ const HamburgerMenuBar = ({ user }) => {
                 {
                     user ?
                         <>
-                        <div className="h-20 w-20 mt-10 self-center">
+                        {/* <div className="h-20 w-20 mt-10 self-center">
                             <Image alt="avatar" width={40} height={40} src={user?.profileImage ? user?.profileImage : '/images/avatar.jpg'} className="rounded-full cursor-pointer h-full w-full object-cover" priority />
-                        </div>
+                        </div> */}
+                        <ZoomProfileImage user={user} style="h-20 w-20 mt-10 self-center" />
                         <div className="text-nowrap text-2xl self-center text-center mt-1 mb-5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-purple-300 to-blue-600">{user.username}</div>
                         <SignOutButton />
                         </>

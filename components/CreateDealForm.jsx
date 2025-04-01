@@ -16,19 +16,27 @@ const CreateDealForm = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+            const { data: { users } } = await axios.get('http://localhost:8000/users', {
+                withCredentials: true
+            })
+
+            const farmerData = users.find(user => user.username === farmer);
+            const distributorData = users.find(user => user.username === distributor);
+            const customerData = users.find(user => user.username === customer);
+
             const res = await axios.post('http://localhost:8000/create-deal', {
                 dealName: farmer + ' - ' + distributor + ' - ' + customer,
                 participants: [
                     {
-                        username: farmer,
+                        ...farmerData,
                         role: 'farmer'
                     },
                     {
-                        username: distributor,
+                        ...distributorData,
                         role: 'distributor'
                     },
                     {
-                        username: customer,
+                        ...customerData,
                         role: 'customer'
                     }
                 ],

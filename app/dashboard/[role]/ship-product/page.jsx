@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSelectedDeal } from '@/contexts/SelectedDealContext';
 import { useUser } from '@/contexts/UserContext';
+import { v4 as uuidv4 } from 'uuid';
+import { format } from 'date-fns';
+import { th } from 'date-fns/locale';
 
 const mockProducts = Array.from({ length: 100 }, (_, i) => ({
     universalId: i + 1,
@@ -88,6 +91,15 @@ const ShipProductPage = () => {
             const res = await axios.post('http://localhost:8000/update-product-status', {
                 productId: product.productId,
                 status: updateStatus,
+                history: [
+                  {
+                    status: updateStatus,
+                    evidence: uuidv4(),
+                    date: format(new Date(), 'dd/MM/yyyy HH:mm', { locale: th }),
+                    timestamp: new Date().getTime()
+                  },
+                  ...product.history
+                ]
             }, { withCredentials: true });
             console.log(res.data);
             fetchProducts();
