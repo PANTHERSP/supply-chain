@@ -30,7 +30,7 @@ const HomePage = () => {
             <div className='text-xl w-95'>
               Revolutionize your supply chain with our platform that integrates inventory and sensor data to monitor product conditions.
             </div>
-            <Link href={`/dashboard/${selectedDeal ? selectedDeal?.dealId : 'select-deal'}/explorer`} className='w-25 text-lg font-semibold flex justify-center items-center p-3 bg-gradient-to-r from-blue-600/80 via-indigo-400/80 to-purple-500/80 rounded-2xl cursor-pointer'>
+            <Link href={`/dashboard/${selectedDeal ? selectedDeal?.dealId : 'select-deal'}/explore`} className='w-25 text-lg font-semibold flex justify-center items-center p-3 bg-gradient-to-r from-blue-600/80 via-indigo-400/80 to-purple-500/80 rounded-2xl cursor-pointer'>
               Explore
             </Link>
           </div>

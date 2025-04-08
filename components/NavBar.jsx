@@ -20,8 +20,8 @@ const getTabs = (role, dealId) => {
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: `/dashboard/${dealId}/explorer`,
+      label: 'Explore',
+      href: `/dashboard/${dealId}/explore`,
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -48,8 +48,8 @@ const getTabs = (role, dealId) => {
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: `/dashboard/${dealId}/explorer`,
+      label: 'Explore',
+      href: `/dashboard/${dealId}/explore`,
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -76,8 +76,8 @@ const getTabs = (role, dealId) => {
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: `/dashboard/${dealId}/explorer`,
+      label: 'Explore',
+      href: `/dashboard/${dealId}/explore`,
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -104,8 +104,8 @@ const getTabs = (role, dealId) => {
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: `/dashboard/${dealId}/explorer`,
+      label: 'Explore',
+      href: `/dashboard/${dealId}/explore`,
       icon: <FaSearch size={iconSize} />,
     }
   ]
@@ -125,8 +125,8 @@ const customerTabs = [
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: '/dashboard/customer/explorer',
+      label: 'Explore',
+      href: '/dashboard/customer/explore',
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -153,8 +153,8 @@ const customerTabs = [
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: '/dashboard/distributor/explorer',
+      label: 'Explore',
+      href: '/dashboard/distributor/explore',
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -182,8 +182,8 @@ const customerTabs = [
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: '/dashboard/farmer/explorer',
+      label: 'Explore',
+      href: '/dashboard/farmer/explore',
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -210,8 +210,8 @@ const customerTabs = [
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: '/dashboard/admin/explorer',
+      label: 'Explore',
+      href: '/dashboard/admin/explore',
       icon: <FaSearch size={iconSize} />,
     },
     {
@@ -228,8 +228,8 @@ const customerTabs = [
       icon: <FaHouse size={iconSize} />,
     },
     {
-      label: 'Explorer',
-      href: '/dashboard/select-deal/explorer',
+      label: 'Explore',
+      href: '/dashboard/select-deal/explore',
       icon: <FaSearch size={iconSize} />,
     },
   ]
@@ -238,7 +238,7 @@ const customerTabs = [
 
 // const customerTabs = [
 //   { label: "Home", href: "/" },
-//   { label: "Explorer", href: "/explorer" },
+//   { label: "Explore", href: "/explore" },
 //   { label: "Purchase", href: "/purchase" },
 //   { label: "Receive", href: "/receive" },
 //   { label: "Your Products", href: "/your-products" },
@@ -246,7 +246,7 @@ const customerTabs = [
 
 // const distributorTabs = [
 //   { label: "Home", href: "/" },
-//   { label: "Explorer", href: "/explorer" },
+//   { label: "Explore", href: "/explore" },
 //   { label: "Buy Product", href: "/buy-product" },
 //   { label: "Receive", href: "/receive" },
 //   { label: "Ship Product", href: "/ship-product" },
@@ -254,7 +254,7 @@ const customerTabs = [
 
 // const farmerTabs = [
 //   { label: "Home", href: "/" },
-//   { label: "Explorer", href: "/explorer" },
+//   { label: "Explore", href: "/explore" },
 //   { label: "Add Product", href: "/add-product" },
 //   { label: "Ship Product", href: "/ship-product" },
 //   { label: "All Product", href: "/all-product" },
@@ -306,8 +306,102 @@ const NavBar = ({ user, filteredDeals, isNavOpen }) => {
   // );
 
   return (
-    <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-10 p-8 text-sky-100 h-[calc(100%-80px)] border-amber-50 border-r-2 transition-all duration-500 ease-in-out`}>
-      { isNavOpen &&
+    <nav className={`${isNavOpen ? 'w-65' : 'w-25'} flex flex-col fixed top-20 left-0 gap-8 p-8 text-sky-100 h-[calc(100%-80px)] border-amber-50 border-r-2 transition-all duration-500 ease-in-out overflow-x-auto`}>
+      <div className='text-4xl text-amber-500 border-dashed border-x-2 border-amber-500 font-bold flex justify-center'>
+        {selectedDeal && pathname.split('/')[2] !== 'select-deal' ?
+          // <div className='text-4xl text-amber-500 border-dashed border-x-2 px-4 border-amber-500 font-bold flex justify-center'>
+            <div>{selectedDeal?.dealId}</div>
+          // </div>
+          : !selectedDeal && pathname.split('/')[2] !== 'select-deal' ?
+          // <div className='text-4xl text-amber-500 border-dashed border-x-2 px-4 border-amber-500 font-bold flex justify-center'>
+            <div>.</div>
+          // </div>
+          : null
+        }
+      </div>
+      {
+        isDealListOpen ?
+          <div className='min-w-49 h-[calc(100%-80px)] opacity-100 flex flex-col gap-6'>
+
+          <button className='text-3xl w-10 h-10 flex items-center mx-auto mt-4 justify-center cursor-pointer' onClick={() => setIsDealListOpen(false)}>
+            ✕
+          </button>
+
+            <div className='flex flex-col gap-6 overflow-y-auto border-y-2 border-sky-100'>
+
+
+            {
+              
+              filteredDeals.map((deal, index) => {
+                
+                // const role = deal.participants.find(participant => participant.username === user.username).role
+                
+                return (
+                  <div className={`${selectedDeal?.dealId === deal.dealId ? 'text-amber-500' : ''} border-amber-50 border-b-2 cursor-pointer gap-3 flex flex-col items-center rounded-xl hover:text-amber-200 transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 p-4`} key={index} onClick={() => {
+                    
+                    router.push(`/dashboard/${deal.dealId}/home`);
+                    
+                  }}>
+                    <p className='text-lg font-semibold'>Deal ID: {deal.dealId}</p>
+                    <div className="flex flex-row items-center justify-around w-full">
+                      {
+                        deal.participants.map((participant, index) =>
+                          <div key={index} className='flex flex-col items-center'>
+
+                            <div className="h-10 aspect-square">
+                              <Image src={participant.profileImage ? participant.profileImage : '/images/avatar.jpg'} alt={participant.username} width={1000} height={1000} className="rounded-full w-full h-full object-cover" />
+                            </div>
+
+                            <p>{participant.username}</p>
+                          </div> 
+                        )
+                      }
+                    </div>
+                      
+                  </div>
+                )
+              }) 
+            }
+              
+          </div>
+        </div>
+        :
+        <>
+          { isNavOpen &&
+            <div className="text-3xl whitespace-nowrap font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
+                {selectedDeal || pathname.split('/')[2] === 'select-deal' ? capitalizeWords(role.replace('-', ' ') ) : '.'}
+            </div>
+          }
+          <div className='flex flex-col gap-8 w-full'>
+            { 
+              isNavOpen ?
+                tabs.map(({ label, href, icon }, index) => (
+                  <Link href={href} key={index} className={`h-10 text-nowrap transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 text-l font-semibold  w-[80%] ${pathname === href ? 'border-amber-500 w-full' : ''} hover:w-full`}>
+                    <div className="flex flex-row items-center">
+                      {icon}
+                      <span className="ml-2 overflow-hidden">{label}</span>
+                    </div>
+                  </Link>
+                )) :
+                tabs.map(({ label, href, icon }, index) => (
+                  <Link href={href} key={index} className={`h-10 transition-all duration-500 ease-in-out border-b-3 border-amber-50 hover:border-amber-200 hover:text-amber-200 text-l font-semibold  w-full ${pathname === href ? 'border-amber-500 text-amber-500' : ''}`}>
+                    <div className="flex flex-col items-center">
+                      {icon}
+                    </div>
+                  </Link>
+                ))
+            }
+          </div>
+          <div className='mt-auto opacity-100 flex flex-col whitespace-nowrap gap-4 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl'>
+            <div className='cursor-pointer rounded-xl flex flex-row justify-center hover:text-amber-200 transition-all duration-500 ease-in-out bg-gradient-to-r from-blue-600/80 via-indigo-400/80 to-purple-500/80 hover:scale-105 p-2 font-semibold' onClick={() => {
+              setIsDealListOpen(true)
+            }}>
+              <p className='overflow-hidden'>{ isNavOpen ? 'Your Deals' : 'O' }</p>
+            </div>
+          </div>
+        </>
+      }
+      {/* { isNavOpen &&
         <div className="text-3xl whitespace-nowrap font-bold text-center border-b-2 border-amber-50 rounded-b-4xl w-full p-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
             {selectedDeal || pathname.split('/')[2] === 'select-deal' ? capitalizeWords(role.replace('-', ' ') ) : '.'}
         </div>
@@ -331,7 +425,7 @@ const NavBar = ({ user, filteredDeals, isNavOpen }) => {
             </Link>
           ))
       }
-      </div>
+      </div> */}
       {/* {
         isNavOpen ?
           filteredDeals.map((deal, index) => {
@@ -342,9 +436,10 @@ const NavBar = ({ user, filteredDeals, isNavOpen }) => {
             // <Link href={`/dashboard/${role}/home`} 
           }
       } */}
-      {
+      
+      {/* {
         isDealListOpen ?
-        <div className='fixed w-49 h-full opacity-100 flex flex-col gap-6 bg-black rounded-xl'>
+        <div className='fixed w-49 h-full opacity-100 flex flex-col gap-6'>
 
           <button className='text-3xl w-10 h-10 flex items-center mx-auto mt-4 justify-center cursor-pointer' onClick={() => setIsDealListOpen(false)}>
             ✕
@@ -396,7 +491,7 @@ const NavBar = ({ user, filteredDeals, isNavOpen }) => {
             <p className='overflow-hidden'>{ isNavOpen ? 'Your Deals' : 'X' }</p>
           </div>
         </div>
-      }
+      } */}
 
     </nav>
   )

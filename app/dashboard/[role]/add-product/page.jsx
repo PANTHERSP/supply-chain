@@ -22,8 +22,8 @@ const AddProductPage = () => {
   const [quantity, setQuantity] = useState('')
   const [grade, setGrade] = useState('')
   const [farmName, setFarmName] = useState('')
-  const [plantingDate, setPlantingDate] = useState('')
-  const [expiryDate, setExpiryDate] = useState('')
+  const [plantDate, setplantDate] = useState('')
+  const [harvestDate, setharvestDate] = useState('')
   const [file, setFile] = useState(null)
   const [filePreview, setFilePreview] = useState('')
 
@@ -55,8 +55,8 @@ const AddProductPage = () => {
         quantity,
         grade,
         farmName,
-        plantingDate,
-        expiryDate,
+        plantDate: format(new Date(plantDate), 'dd/MM/yyyy HH:mm', { locale: th }),
+        harvestDate: format(new Date(harvestDate), 'dd/MM/yyyy HH:mm', { locale: th }),
         imageUrl: await uploadFile(file, 'products'),
         dealId: middlePathname,
         history: [
@@ -77,8 +77,8 @@ const AddProductPage = () => {
       setQuantity('')
       setGrade('')
       setFarmName('')
-      setPlantingDate('')
-      setExpiryDate('')
+      setplantDate('')
+      setharvestDate('')
       setFile(null)
       setFilePreview('')
     } catch (err) {
@@ -163,22 +163,22 @@ const AddProductPage = () => {
             />
           </label>
           <label className="flex flex-col gap-2">
-            <span className="text-lg text-white">Planting Date:</span>
+            <span className="text-lg text-white">Plant Date:</span>
             <input
               type="datetime-local"
-              placeholder="Enter Planting Date"
-              value={plantingDate}
-              onChange={(e) => setPlantingDate(e.target.value)}
+              placeholder="Enter Plant Date"
+              value={plantDate}
+              onChange={(e) => setplantDate(e.target.value)}
               className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             />
           </label>
           <label className="flex flex-col gap-2">
-            <span className="text-lg text-white">Expiry Date:</span>
+            <span className="text-lg text-white">Harvest Date:</span>
             <input
               type="datetime-local"
-              placeholder="Enter Expiry Date"
-              value={expiryDate}
-              onChange={(e) => setExpiryDate(e.target.value)}
+              placeholder="Enter Harvest Date"
+              value={harvestDate}
+              onChange={(e) => setharvestDate(e.target.value)}
               className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             />
           </label>

@@ -22,7 +22,7 @@ const CommonHomePage = () => {
             <div className='text-xl w-95'>
               Revolutionize your supply chain with our platform that integrates inventory and sensor data to monitor product conditions.
             </div>
-            <Link href={'/dashboard/customer/explorer'} className='w-25 flex justify-center items-center p-3 rounded-2xl bg-purple-900 hover:bg-purple-800 cursor-pointer hover:rounded-2xl hover:p-3'>
+            <Link href={'/dashboard/customer/explore'} className='w-25 flex justify-center items-center p-3 rounded-2xl bg-purple-900 hover:bg-purple-800 cursor-pointer hover:rounded-2xl hover:p-3'>
               Explore
             </Link>
           </div>

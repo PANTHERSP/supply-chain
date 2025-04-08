@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import HamburgerMenuBar from "./HamburgerMenuBar";
+import ZoomProfileImage from "./ZoomProfileImage";
 
 const LandingPageHeader = ({ user }) => {
 
@@ -44,9 +45,10 @@ const LandingPageHeader = ({ user }) => {
             user ?
               <>
                 <SignOutButton />
-                <div className="h-11 aspect-square">
+                {/* <div className="h-11 aspect-square">
                   <Image alt="avatar" width={40} height={40} src={user?.profileImage ? user?.profileImage : '/images/avatar.jpg'} className="rounded-full cursor-pointer h-full w-full object-cover" priority />
-                </div>
+                </div> */}
+                <ZoomProfileImage user={user} style="h-11 aspect-square"/>
                 <div className="text-nowrap text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-purple-300 to-blue-600 text-center">{user.username}</div>
               </>
             :
