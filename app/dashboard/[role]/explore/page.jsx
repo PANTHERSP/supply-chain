@@ -90,8 +90,8 @@ const ExplorePage = () => {
                             className="flex flex-col p-5 text-sky-100 bg-gradient-to-r from-indigo-950 via-gray-900 to-gray-800 rounded-xl hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
                             onClick={() => toggleModal(product)}
                         >
-                            <div className='bg-red-500 font-bold rounded-full flex justify-center items-center self-center px-2 py-2 text-sm mb-4'>
-                                {product.history[0].status}
+                            <div className='bg-indigo-600 font-bold rounded-full flex justify-center items-center self-center px-3 py-1 text-xl mb-4'>
+                                {product.dealId}
                             </div>
                             <div className="relative w-full aspect-square mb-4">
                                 <Image fill src={product.imageUrl} alt={product.productName} className="object-cover rounded-lg" />
@@ -106,9 +106,10 @@ const ExplorePage = () => {
                             <p className="text-sm text-sky-100">Harvest Date: {product.harvestDate}</p>
                             
                             {/* <div className="text-sky-100 flex justify-between mt-4 text-sm"> */}
-                                <div className='bg-indigo-600 font-bold rounded-full flex justify-center items-center self-center px-3 py-1 text-xl mt-4'>
-                                    {product.dealId}
-                                </div>
+                            
+                            <div className='bg-red-500 font-bold rounded-full flex justify-center items-center self-center px-2 py-2 text-sm mt-4'>
+                                {product.history[0].status}
+                            </div>
                                 {/* <div className='bg-blue-500 font-bold rounded-2xl flex justify-center items-center px-2 py-1'>
                                     {product.history[0].status}
                                 </div> */}
