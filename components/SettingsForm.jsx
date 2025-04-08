@@ -66,7 +66,7 @@ const SettingsForm = ({ user }) => {
             <FileUploader
               handleChange={handleChange}
               name="profileImage"
-              types={["JPG", "PNG", "GIF"]}
+              types={["JPG", "PNG", "GIF", "JPEG", "SVG", "WEBP"]}
               className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             />
             {profileImagePreview && <Image src={profileImagePreview} alt="Profile Image Preview" width={200} height={200} className="rounded-full w-25 h-25 self-center" />}

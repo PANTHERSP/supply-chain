@@ -96,7 +96,7 @@ const ExplorePage = () => {
                             <div className="relative w-full aspect-square mb-4">
                                 <Image fill src={product.imageUrl} alt={product.productName} className="object-cover rounded-lg" />
                             </div>
-                            <h2 className="text-xl font-semibold text-amber-500 mb-2">{product.productName}</h2>
+                            <h2 className="text-xl font-semibold text-amber-500 mb-2 truncate">{product.productName}</h2>
                             <p className="text-sm text-sky-100">Product ID: {product.productId}</p>
                             <p className="text-sm text-sky-100">Farm Name: {product.farmName}</p>
                             <p className="text-sm text-sky-100">Price: ฿{product.price}</p>

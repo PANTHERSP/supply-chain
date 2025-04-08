@@ -96,7 +96,7 @@ const AddProductPage = () => {
             <FileUploader
               handleChange={handleChange}
               name="file"
-              types={["JPG", "PNG", "GIF"]}
+              types={["JPG", "PNG", "GIF", "JPEG", "SVG", "WEBP"]}
               className="p-2 pl-4 text-sm text-gray-700 bg-white rounded-2xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             />
             {filePreview && <Image src={filePreview} alt="Preview" width={200} height={200} className="rounded-md w-full h-full" />}
